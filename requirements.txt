@@ -1,0 +1,12 @@
+autogluon==0.8.0
+autogluon.common==0.8.0
+autogluon.core==0.8.0
+autogluon.features==0.8.0
+autogluon.multimodal==0.8.0
+autogluon.tabular==0.8.0
+autogluon.timeseries==0.8.0
+click==8.1.7
+Flask==3.0.0
+pandas==1.5.3
+Requests==2.31.0
+scikit_learn==1.2.2
