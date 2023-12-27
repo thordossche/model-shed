@@ -4,7 +4,7 @@ from itertools import chain
 
 class DatabaseLayer:
     def __init__(self):
-        self.conn = sqlite3.connect('./database.db')
+        self.conn = sqlite3.connect('database.db')
         self.cursor = self.conn.cursor()
         self.create_model_table()
 

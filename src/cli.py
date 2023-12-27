@@ -107,7 +107,7 @@ def test_api(model_name):
 @cli.command()
 @click.argument('model_name')
 def test_revenue(model_name):
-    with open('./revenue.pkl', 'br') as f:
+    with open('revenue.pkl', 'br') as f:
         test_data = pickle.load(f)
 
     test_data = test_data.to_dict('records')[0]
