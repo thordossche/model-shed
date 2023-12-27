@@ -4,6 +4,28 @@ Model-Shed is a tool designed for the management and utilization of machine lear
 ## Purpose
 Model-Shed offers a centralized solution for storing and accessing machine learning models, enabling their use across multiple projects. By facilitating model integration through API calls, it eliminates the need for heavy ML libraries in each project, reducing dependency overhead. This approach also keeps code repositories cleaner by not storing the models directly in them, making it ideal for projects that require only predictions.
 
+## Usage
+Model-Shed offers a comprehensive API for model management and a prediction endpoint for processing feature inputs. Additionally, it includes a CLI tool for easier model management tasks.
+
+- **Running the API**: Execute `python src/api.py` to start the API service.
+- **Using the CLI**: Run `python src/cli.py --help` for CLI commands and usage.
+
+For detailed API and CLI documentation, please refer to the provided docs.
+
+Additionally, `src/test_utils.py` features a CLI for uploading mock models and testing their functionalities. It's an excellent starting point for experimenting with Model-Shed's capabilities.
+
+## Configuration
+Model-Shed has a couple of configurable parts:
+- #### CLI
+    To link the CLI with the API, set the `BASE_URL` variable in `src/cli.py` to the API's hosting address. This ensures seamless communication between the CLI and the API server.
+
+- #### Database
+    If you intend to use Model-Shed with an existing database, you will need to develop your own database layer. The provided database layer in `src/database_layer.py` creates a small local database with a single table. You can replace it with your custom database layer implementation to suit your specific database requirements.
+
+- #### Available models
+    At present, Model-Shed supports two model types: `sklearn MLPRegressor` and `autogluon TabularPredictor`. If you require additional model types, you can easily extend the list of supported models in `src/model_types.py`.
+
+
 ## API Endpoints
 
 - #### [`GET`] `/models`
