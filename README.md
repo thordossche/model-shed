@@ -4,56 +4,66 @@ This document provides detailed information about the Model Prediction API, whic
 
 ## API Endpoints
 
-### 1. List Available Models
+- #### [`GET`] `/models`
+    - **Description**: Retrieves a list of all available models from the database.
+    - **Response**:
+      - `200 OK`: Returns a JSON object containing an array of model names.
 
-- **Endpoint**: `/models`
-- **Method**: `GET`
-- **Description**: Retrieves a list of all available models from the database.
-- **Response**:
-  - `200 OK`: Returns a JSON object containing an array of model names.
+- #### [`GET`] `/<model_name>`
+    - **Description**: Provides detailed information about a specific model.
+    - **URL Parameters**:
+      - `model_name`: The name of the model.
+    - **Response**:
+      - `200 OK`: Returns a JSON object with the model's name, type, and features.
+      - `400 Bad Request`: Error message if the model is not found.
 
-### 2. Get Model Information
+- #### [`PUT`]  `/<model_name>`
+    - **Description**: Upload a model.
+    - **URL Parameters**:
+      - `model_name`: The intended name for the new model.
+    - **Form Data**:
+      - `model_type`: The type of the model (must be a valid type).
+      - `file`: The binary file containing the model data.
+    - **Response**:
+      - `200 OK`: Confirmation message of successful upload.
+      - `400 Bad Request`: Error message if the model type is invalid or the file part is missing.
 
-- **Endpoint**: `/<model_name>`
-- **Method**: `GET`
-- **Description**: Provides detailed information about a specific model.
-- **URL Parameters**:
-  - `model_name`: The name of the model.
-- **Response**:
-  - `200 OK`: Returns a JSON object with the model's name, type, and features.
-  - `400 Bad Request`: Error message if the model is not found.
+- #### [`DELETE`] `/<model_name>`
+    - **Description**: Delete the specified model.
+    - **URL Parameters**:
+      - `model_name`: The name of the model to be deleted.
+    - **Response**:
+      - `200 OK`: Confirmation message of successful deletion.
 
-### 3. Predict with a Model
+- #### [`POST`] `/<model_name>/predict`
+    - **Description**: Performs a prediction using the specified model.
+    - **URL Parameters**:
+      - `model_name`: The name of the model.
+    - **Request Body**:
+      - `features`: JSON object containing the features required for prediction.
+    - **Response**:
+      - `200 OK`: Returns a JSON object containing the prediction results.
+      - `400 Bad Request`: Error message if the model is not found or if an error occurs during prediction.
 
-- **Endpoint**: `/<model_name>/predict`
-- **Method**: `POST`
-- **Description**: Performs a prediction using the specified model.
-- **URL Parameters**:
-  - `model_name`: The name of the model.
-- **Request Body**:
-  - `features`: JSON object containing the features required for prediction.
-- **Response**:
-  - `200 OK`: Returns a JSON object containing the prediction results.
-  - `400 Bad Request`: Error message if the model is not found or if an error occurs during prediction.
+## CLI
+The cli tool in `src/cli.py` implements some of the api methods. The cli is mainly ment for managing the available models.
 
-### 4. Upload a New Model
+- #### `list_models`
+    - **Description**: Retrieves and displays a list of all machine learning models available on the server.
 
-- **Endpoint**: `/<model_name>`
-- **Method**: `PUT`
-- **URL Parameters**:
-  - `model_name`: The intended name for the new model.
-- **Form Data**:
-  - `model_type`: The type of the model (must be a valid type).
-  - `file`: The binary file containing the model data.
-- **Response**:
-  - `200 OK`: Confirmation message of successful upload.
-  - `400 Bad Request`: Error message if the model type is invalid or the file part is missing.
+- #### `info <model_name>`
+    - **Parameters**:
+      - `model_name`: The name of the model to retrieve information about.
+    - **Description**: Fetches and shows details about a specific model.
 
-### 5. Delete a Model
+- #### `upload <model_name> <file_path> <model_type>`
+    - **Parameters**:
+      - `model_name`: Name for the model to be uploaded.
+      - `file_path`: Path to the model file or directory. If a directory, it will be zipped before upload.
+      - `model_type`: Type of the model, must be one of the predefined model types.
+    - **Description**: Uploads a new model to the server. If the file path is a directory, it zips the directory before upload.
 
-- **Endpoint**: `/<model_name>`
-- **Method**: `DELETE`
-- **URL Parameters**:
-  - `model_name`: The name of the model to be deleted.
-- **Response**:
-  - `200 OK`: Confirmation message of successful deletion.
+- #### `delete <model_name>`
+    - **Parameters**:
+      - `model_name`: The name of the model to be deleted.
+    - **Description**: Deletes a model from the server.
