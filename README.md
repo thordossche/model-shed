@@ -1,6 +1,8 @@
-# Model Prediction API Documentation
+# Model-Shed
+Model-Shed is a tool designed for the management and utilization of machine learning models. It provides a structured and organized environment akin to a shed, where models are stored, managed, and deployed with ease.
 
-This document provides detailed information about the Model Prediction API, which allows for managing and utilizing machine learning models for prediction. The API is implemented using Flask and interacts with a database for storing and retrieving model data.
+## Purpose
+Model-Shed offers a centralized solution for storing and accessing machine learning models, enabling their use across multiple projects. By facilitating model integration through API calls, it eliminates the need for heavy ML libraries in each project, reducing dependency overhead. This approach also keeps code repositories cleaner by not storing the models directly in them, making it ideal for projects that require only predictions.
 
 ## API Endpoints
 
