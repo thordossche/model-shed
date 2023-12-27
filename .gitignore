@@ -1,6 +1,6 @@
 *.db
 revenue-model
-revenue.pkl
+src/revenue.pkl
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
