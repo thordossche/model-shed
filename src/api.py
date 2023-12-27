@@ -16,7 +16,7 @@ def models():
 def model_info(model_name):
     model_type, model_data = DatabaseLayer().get_model(model_name)
     if model_type is None or model_data is None:
-        raise ValueError(f"Model '{model_name}' not found.")
+        return jsonify({'error': f"Model '{model_name}' not found."}), 400
 
     predictor = load_predictor(model_type, model_data)
     features = predictor.features()
@@ -32,15 +32,15 @@ def model_info(model_name):
 def predict(model_name):
     model_type, model_data = DatabaseLayer().get_model(model_name)
     if model_type is None or model_data is None:
-        raise ValueError(f"Model '{model_name}' not found.")
+        return jsonify({'error': f"Model '{model_name}' not found."}), 400
 
     predictor = load_predictor(model_type, model_data)
     features = pd.DataFrame(request.json['features'])
     try:
         predictions = predictor.predict(features)
-        return jsonify({'predictions': list(predictions)})
+        return jsonify({'predictions': list(predictions)}), 200
     except Exception as _:
-        raise ValueError(traceback.format_exc())
+        return jsonify({'error': traceback.format_exc()}), 400
 
 
 @app.route('/<model_name>', methods=['PUT'])
