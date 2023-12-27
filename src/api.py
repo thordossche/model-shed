@@ -53,7 +53,7 @@ def upload_model(model_name):
     if 'file' not in request.files:
         return jsonify({'error': 'No file part'}), 400
 
-    DatabaseLayer().add_model(model_name, ModelType(model_type), request.files['file'].read())
+    DatabaseLayer().add_model(model_name, ModelType.from_name(model_type), request.files['file'].read())
 
     return jsonify({'message': f"'{model_name}' uploaded successfully"}), 200
 
